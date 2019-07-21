@@ -1,0 +1,4 @@
+# files produced by running LaTeX 
+*.aux
+*.log
+*.pdf

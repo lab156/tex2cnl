@@ -1,0 +1,46 @@
+\documentclass{article}
+
+\usepackage{tex2cnl}
+%\usepackage{amsfonts}
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\pder}[2][]{\frac{\partial#1}{\partial#2}}
+
+%\listadd\csList{CNLRR}%
+
+\begin{document}
+\noindent
+First we define some macros to test \verb|\CNLexpand| commands:
+The macro \verb|\RR| expands to:  $\RR$.\\
+The macro \verb|$$\pder{x}$$| expands:  $$\pder{x}$$
+The macro \verb|$$\pder[f]{x}$$| expands:  $$\pder[f]{x}$$
+
+\noindent
+Then we specify the behaviour of some macros by including: 
+\begin{verbatim}
+\CNLnoexpand\RR
+\CNLdelete\pder
+\CNLexpand\nabla
+\CNLexpand\int
+\CNLcustom\frac
+\end{verbatim}
+
+\CNLnoexpand\RR
+\CNLdelete\pder
+\CNLexpand\nabla
+\CNLexpand\int
+\CNLcustom\frac
+
+
+\noindent
+The list of all commands that have been ``CNLed'' is available in a list:\\
+
+\begin{tabular}{|c|c|}
+    \hline
+    \textbf{Supported Command} & \textbf{Expand behaviour} \\
+    \hline
+    \printList
+    \hline
+\end{tabular}
+
+\end{document}

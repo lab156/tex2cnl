@@ -1,0 +1,58 @@
+%
+% This is `tex2cnl.sty'
+%
+%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tex2cnl}[2019-07-20 v1.1b]
+\RequirePackage{amsmath, amsfonts}
+\RequirePackage{etoolbox}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%This flag tells whether to run as presentation or CNL
+\newbool{isPresentation}
+
+\DeclareOption{cnl}{
+    \boolfalse{isPresentation}
+}
+
+\DeclareOption{pres}{
+    \booltrue{isPresentation}
+}
+
+\ExecuteOptions{pres} %By default run as presentation
+
+% Remove the backslash at the beggining of the command
+\newcommand{\@removeabs}[1]{%
+  \ifcat\relax\noexpand#1%
+    \expandafter\expandafter\expandafter\@gobble\expandafter\string
+  \fi
+  #1%
+}
+
+
+% Four different expansion options for the CNL engine
+% For example \CNLexpand\RR defines a macro \CNLRR that contains the value "Expand: true"
+% The list csList is populated with the name of the command and the CNL expansion behaviour
+\newcommand{\CNLnoexpand}[1]{%
+    \expandafter\def\csname CNL\@removeabs{#1}\endcsname{Expand: false}%
+    \listadd\csList{\@removeabs{#1}}%
+ }
+\newcommand{\CNLexpand}[1]{%
+    \expandafter\def\csname CNL\@removeabs{#1}\endcsname{Expand: true}%
+    \listadd\csList{\@removeabs{#1}}%
+ }
+\newcommand{\CNLdelete}[1]{%
+    \expandafter\def\csname CNL\@removeabs{#1}\endcsname{Expand: delete}%
+    \listadd\csList{\@removeabs{#1}}%
+ }
+\newcommand{\CNLcustom}[1]{%
+    \expandafter\def\csname CNL\@removeabs{#1}\endcsname{Expand: custom}%
+    \listadd\csList{\@removeabs{#1}}%
+ }
+
+\newenvironment{CNL}{}{}
+%Print a list of control sequences known to the CNL environment
+\newcommand{\printLine}[1]{#1 & \csuse{CNL#1} \\}
+\newcommand{\printList}{\forlistloop{\printLine}{\csList}}
