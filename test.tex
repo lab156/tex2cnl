@@ -10,8 +10,8 @@
 
 \begin{document}
 \noindent
-First we define some macros to test \verb|\CNLexpand| commands:
-The macro \verb|\RR| expands to:  $\RR$.\\
+First we define some macros to test \verb|\CNLexpand| commands:\\
+The macro \verb|\RR| expands to:  $$\RR $$.\\
 The macro \verb|$$\pder{x}$$| expands:  $$\pder{x}$$
 The macro \verb|$$\pder[f]{x}$$| expands:  $$\pder[f]{x}$$
 
@@ -20,24 +20,24 @@ Then we specify the behaviour of some macros by including:
 \begin{verbatim}
 \CNLnoexpand\RR
 \CNLdelete\pder
-\CNLexpand\nabla
-\CNLexpand\int
-\CNLcustom\frac
+\CNLdelete[1]\nabla
+\CNLdelete[2]\frac
 \end{verbatim}
 
 \CNLnoexpand\RR
 \CNLdelete\pder
-\CNLexpand\nabla
-\CNLexpand\int
-\CNLcustom\frac
+\CNLdelete[1]\nabla
+%\CNLexpand\int
+\CNLdelete[2]\frac
 
 
 \noindent
 The list of all commands that have been ``CNLed'' is available in a list:\\
+Optional arguments are added so the table can be displayed
 
-\begin{tabular}{|c|c|}
+\begin{tabular}{|c|c|c|}
     \hline
-    \textbf{Supported Command} & \textbf{Expand behaviour} \\
+    \textbf{Supported Command} & \textbf{Expansion} &\textbf{Expand behaviour} \\
     \hline
     \printList
     \hline

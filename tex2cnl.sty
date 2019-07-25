@@ -43,9 +43,16 @@
     \expandafter\def\csname CNL\@removeabs{#1}\endcsname{Expand: true}%
     \listadd\csList{\@removeabs{#1}}%
  }
-\newcommand{\CNLdelete}[1]{%
-    \expandafter\def\csname CNL\@removeabs{#1}\endcsname{Expand: delete}%
-    \listadd\csList{\@removeabs{#1}}%
+\newcommand{\CNLdelete}[2][0]{% \indy{Notation}{V@$V$ (packing)}%
+    %\CNLdelete[n]\cs where n is the number of arguments
+    % if n is zero then just expand to empty -------|
+    \if#10%
+    \expandafter\def\csname\@removeabs{#2}\endcsname{}%
+    \else%
+    \expandafter\renewcommand\csname\@removeabs{#2}\endcsname[#1]{}%
+    \fi
+    \expandafter\def\csname CNL\@removeabs{#2}\endcsname{Expand: delete}%
+    \listadd\csList{\@removeabs{#2}}%
  }
 \newcommand{\CNLcustom}[1]{%
     \expandafter\def\csname CNL\@removeabs{#1}\endcsname{Expand: custom}%
@@ -54,5 +61,5 @@
 
 \newenvironment{CNL}{}{}
 %Print a list of control sequences known to the CNL environment
-\newcommand{\printLine}[1]{#1 & \csuse{CNL#1} \\}
+\newcommand{\printLine}[1]{#1 & $\csuse{#1}{a}{b}$ &\csuse{CNL#1} \\}
 \newcommand{\printList}{\forlistloop{\printLine}{\csList}}
