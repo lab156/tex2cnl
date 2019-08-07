@@ -13,11 +13,11 @@
 %This flag tells whether to run as presentation or CNL
 \newbool{isPresentation}
 
-\DeclareOption{cnl}{
+\DeclareOption{cnl}{%
     \boolfalse{isPresentation}
 }
 
-\DeclareOption{pres}{
+\DeclareOption{pres}{%
     \booltrue{isPresentation}
 }
 
@@ -63,3 +63,10 @@
 %Print a list of control sequences known to the CNL environment
 \newcommand{\printLine}[1]{#1 & $\csuse{#1}{a}{b}$ &\csuse{CNL#1} \\}
 \newcommand{\printList}{\forlistloop{\printLine}{\csList}}
+
+%Print an ellipsis with the following arguments:
+% #1: name of the macro to be expanded
+% #2: starting value
+% #3: last value
+% #4: operator
+\newcommand{\ellip}[4]{\csuse{#1}{#2}#4\ldots #4 \ellipMacro{#3}}

@@ -22,6 +22,8 @@ Programming type control sequences are disabled. For example `\futurelet` nand `
      
 When the `isPresentation` flag is set to `true`, the file is processed as an ordinary .tex file. 
 
+## Ellipsis Macro
+* If the ellipMacro is not defined, the document is typeset with no errors warning or alerts. The field is simply left empty. I am not sure this is the best behaviour.
 ### Notes
 - It is not necessary to write out to an external file. All the processing can be done withing the .tex file
 - Currently supporting macros defined with `newcommand`.

@@ -1,10 +1,12 @@
 \documentclass{article}
 
+\usepackage{amsmath,amsfonts}
 \usepackage{tex2cnl}
-%\usepackage{amsfonts}
 
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\pder}[2][]{\frac{\partial#1}{\partial#2}}
+\newcommand{\ellipMacro}[1]{x^{#1}}
+\newcommand{\otherMacro}[1]{\alpha^{#1}}
 
 %\listadd\csList{CNLRR}%
 
@@ -27,7 +29,7 @@ Then we specify the behaviour of some macros by including:
 \CNLnoexpand\RR
 \CNLdelete\pder
 \CNLdelete[1]\nabla
-%\CNLexpand\int
+\CNLexpand\int
 \CNLdelete[2]\frac
 
 
@@ -43,4 +45,11 @@ Optional arguments are added so the table can be displayed
     \hline
 \end{tabular}
 
+\noindent
+and $$\ellipMacro{x}$$
+How about the $$\frac{1}{2}$$
+
+We have to demo ellip inline: $\ellip{ellipMacro}{1}{10}{+}$ 
+$$\ellip{ellipMacro}{1}{n}{+} = (x^{n+1}-1)/(x-1)$$ 
+Now with other macro: $\ellip{otherMacro}{1}{5}{-}$
 \end{document}
