@@ -1,0 +1,53 @@
+\documentclass{article}
+
+\usepackage{amsmath,amsfonts}
+\usepackage{verbatim}
+\usepackage{tex2cnl}
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\pder}[2][]{\frac{\partial#1}{\partial#2}}
+\newcommand{\firstMacro}[1]{x^{#1}}
+\newcommand{\otherMacro}[1]{\int^{#1+1}_{#1}f\, dx}
+\newcommand{\thirdMacro}[1]{\alpha^{i\, #1}}
+\newcommand{\fourthMacro}[1]{\Gamma^{k}_{i\, #1}}
+
+\begin{document}
+The inner macro is defined just as any other with a \texttt{newcommand}.
+\begin{verbatim}
+\newcommand{\firstMacro}[1]{x^{#1}}
+\newcommand{\otherMacro}[1]{\int^{#1+1}_{#1}f\, dx}
+\newcommand{\thirdMacro}[1]{\alpha^{i\, #1}}
+\newcommand{\fourthMacro}[1]{\Gamma^{k}_{i\, #1}}
+\end{verbatim}
+To typeset an ellipsis expression, using the \verb!\ellip! control sequence (this command is provided by including the \texttt{tex2cnl} LaTeX package.) The arguments of the command are the following;
+\begin{description}
+\item[1st:] The name of the macro that is repeated in the ellipsis. The macro should only take one argument, but this can be changed easily. Currently, the name of the macro with no backslash is required, but this can be changed easily also.
+\item[2nd:] The starting value for the ellipsis expression.
+\item[3rd:] The ending value for the ellipsis expression.
+\item[4th:] The operator that the ellipsis folds on.
+\end{description}
+The following code exemplifies how to use the \texttt{ellip} control sequence:
+\begin{verbatim}
+$$\ellip{firstMacro}{0}{n}{+} = (x^{n+1}-1)/(x-1)$$ 
+\end{verbatim}
+The result looks as follows:
+$$\ellip{firstMacro}{0}{n}{+} = \frac{1-x^{n+1}}{1-x}$$ 
+More examples of the same \texttt{ellip} macro with different functions:
+\begin{verbatim}
+$$\ellip{otherMacro}{k}{n}{+}$$ 
+\end{verbatim}
+$$\ellip{otherMacro}{k}{n}{+}$$ 
+\begin{verbatim}
+$$\ellip{thirdMacro}{1}{n}{\oplus}$$ 
+\end{verbatim}
+$$\ellip{thirdMacro}{1}{n}{\oplus}$$ 
+\begin{verbatim}
+$$\ellip{fourthMacro}{1}{n}{+}$$ 
+\end{verbatim}
+$$\ellip{fourthMacro}{1}{n}{+}$$ 
+\end{document}
+
+\begin{itemize}
+\item Currently, \texttt{ellip} has the macro name \emph{withou backslash} as the first argument. I am not sure this is the best option.
+\item The \texttt{ellip} is defined with a simple combination which makes it easily extensible.
+\end{itemize}
